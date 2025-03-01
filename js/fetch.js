@@ -49,7 +49,7 @@ async function fetchData(month, year) {
 
     try {
         // Fetch income data
-        const response = await fetch(`http://localhost:3000/fetch_income?month=${month}&year=${year}`);
+        const response = await fetch(`https://money-manager-9p85.onrender.com/fetch_income?month=${month}&year=${year}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -79,7 +79,7 @@ async function fetchData(month, year) {
         document.getElementById('income_amount').innerText = totalIncome.toFixed(2);
 
         // Fetch and display expenses data
-        const expensesResponse = await fetch(`http://localhost:3000/fetch_expenses?month=${month}&year=${year}`);
+        const expensesResponse = await fetch(`https://money-manager-9p85.onrender.com/fetch_expenses?month=${month}&year=${year}`);
         if (!expensesResponse.ok) {
             throw new Error(`HTTP error! Status: ${expensesResponse.status}`);
         }
@@ -112,7 +112,7 @@ async function fetchData(month, year) {
         document.getElementById('balance_amount').innerText = totalBalance.toFixed(2);
 
         // Fetch and display budget data
-        const budgetResponse = await fetch(`http://localhost:3000/fetch_budget?month=${month}&year=${year}`);
+        const budgetResponse = await fetch(`https://money-manager-9p85.onrender.com/fetch_budget?month=${month}&year=${year}`);
         if (!budgetResponse.ok) {
             throw new Error(`HTTP error! Status: ${budgetResponse.status}`);
         }
@@ -211,7 +211,7 @@ async function handleIncomeDeletion(event) {
     const recordId = event.target.closest('.income_records').dataset.id;
     console.log(`The record id from income table is ${recordId}`);
     try {
-        const response = await fetch(`http://localhost:3000/delete_income/${recordId}`, {
+        const response = await fetch(`https://money-manager-9p85.onrender.com/delete_income/${recordId}`, {
             method: 'DELETE'
         });
         if (response.ok) {
@@ -232,7 +232,7 @@ async function handleExpensesDeletion(event) {
     const recordId = event.target.closest('.expenses_records').dataset.id;
     console.log(`Record id from expenses table is ${recordId}`);
     try {
-        const response = await fetch(`http://localhost:3000/delete_expenses/${recordId}`, {
+        const response = await fetch(`https://money-manager-9p85.onrender.com/delete_expenses/${recordId}`, {
             method: 'DELETE'
         });
         if (response.ok) {
@@ -253,7 +253,7 @@ async function handleBudgetDeletion(event) {
     const recordId = event.target.closest('.budget_records').dataset.id;
     console.log(`Record id from budget table is ${recordId}`);
     try {
-        const response = await fetch(`http://localhost:3000/delete_budget/${recordId}`, {
+        const response = await fetch(`https://money-manager-9p85.onrender.com/delete_budget/${recordId}`, {
             method: 'DELETE'
         });
         if (response.ok) {

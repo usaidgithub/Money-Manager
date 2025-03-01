@@ -9,7 +9,7 @@
 <body>
     
     <div class="container">
-        <form action="http://localhost:3000/login_user" method="POST" class="login-form">
+        <form action="https://money-manager-9p85.onrender.com/login_user" method="POST" class="login-form">
             <h2>Login</h2>
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -27,7 +27,7 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            fetch('http://localhost:3000/auth/check-session', {
+            fetch('https://money-manager-9p85.onrender.com/auth/check-session', {
                 method: 'GET',
                 credentials: 'include'  // Ensures cookies & session are sent
             })

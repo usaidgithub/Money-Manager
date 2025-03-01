@@ -11,7 +11,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 // Parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: "http://127.0.0.1:5501",  // Allow frontend to access backend
+    origin: "http://127.0.0.1:5501", 
     credentials: true  // Allow cookies & sessions
 }));
 

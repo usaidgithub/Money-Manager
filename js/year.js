@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             // Fetch income data for the year
-            const incomeResponse = await fetch(`http://localhost:3000/fetch_yearincome?year=${year}`);
+            const incomeResponse = await fetch(`https://money-manager-9p85.onrender.com/fetch_yearincome?year=${year}`);
             if (!incomeResponse.ok) throw new Error(`HTTP error! Status: ${incomeResponse.status}`);
             const incomeData = await incomeResponse.json();
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('income_amount').innerText = totalIncome.toFixed(2);
 
             // Fetch expenses data for the year
-            const expensesResponse = await fetch(`http://localhost:3000/fetch_yearexpenses?year=${year}`);
+            const expensesResponse = await fetch(`https://money-manager-9p85.onrender.com/fetch_yearexpenses?year=${year}`);
             if (!expensesResponse.ok) throw new Error(`HTTP error! Status: ${expensesResponse.status}`);
             const expensesData = await expensesResponse.json();
 
