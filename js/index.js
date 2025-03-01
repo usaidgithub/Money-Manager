@@ -113,6 +113,10 @@ app.post('/register_user', async (req, res) => {
     });
 });
 
+app.get("/", (req, res) => {
+    console.log("Serving home page");
+    res.sendFile(path.join(__dirname, "..", "homepage.html"));
+});
 // Route to serve the login page
 app.get('/login_user', (req, res) => {
     console.log("Serving login_user page");
