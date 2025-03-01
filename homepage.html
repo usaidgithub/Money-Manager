@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMat - Your Personal Finance Manager</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #0082e6;
+            --secondary-color: rgb(44, 62, 80);
+            --light-color: #f4f7f9;
+            --accent-color: #00b894;
+            --text-color: #333;
+            --text-light: #f4f7f9;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-color);
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 15px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--light-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 5% 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .secondary-button {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: transparent;
+            color: var(--light-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-left: 15px;
+            border: 2px solid var(--light-color);
+            transition: all 0.3s;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 5%;
+            text-align: center;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 5%;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            flex: 1;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 5%;
+            background-color: var(--light-color);
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 50px 5% 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-light);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 1024px) {
+            .features-grid,
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                background-color: var(--primary-color);
+                height: 100vh;
+                width: 70%;
+                top: 0;
+                right: -100%;
+                text-align: left;
+                z-index: 999;
+                transition: 0.5s;
+                flex-direction: column;
+                padding: 80px 0 0 40px;
+            }
+
+            .nav-links li {
+                margin: 0 0 25px 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 5% 80px;
+            }
+
+            .hero-content {
+                margin-bottom: 40px;
+            }
+
+            .features-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                flex-direction: column;
+            }
+
+            .step {
+                margin-bottom: 40px;
+            }
+
+            .step:not(:last-child)::after {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-column {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cta-button, .secondary-button {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">Money<span>Mat</span></a>
+        <div class="menu-toggle">☰</div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Take Control of Your Finances with MoneyMat</h1>
+            <p>The smart way to track, analyze, and optimize your financial life. MoneyMat helps you make informed decisions for a secure financial future.</p>
+            <div class="hero-buttons">
+                <a href="#get-started" class="cta-button">Get Started</a>
+                <a href="#features" class="secondary-button">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://img.freepik.com/premium-vector/business-man-shows-financial-report-manager-makes-presentation-cartoon-style_56103-926.jpg" alt="MoneyMat App Dashboard">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Powerful Features</h2>
+        <p class="section-subtitle">MoneyMat provides all the tools you need to manage your finances in one place.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Expense Tracking</h3>
+                <p class="feature-description">Easily track your expenses across multiple accounts. Categorize transactions automatically and stay on top of your spending.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Financial Analysis</h3>
+                <p class="feature-description">Get detailed insights into your financial habits with visual reports and analytics that help you understand where your money goes.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Budget Planning</h3>
+                <p class="feature-description">Set up personalized budgets for different expense categories and receive alerts when you're nearing your limits.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Savings Goals</h3>
+                <p class="feature-description">Create and track savings goals for big purchases, vacations, or your emergency fund with progress tracking.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3 class="feature-title">Secure Storage</h3>
+                <p class="feature-description">Your financial data is encrypted and secure. We use bank-level security measures to protect your information.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">Mobile Access</h3>
+                <p class="feature-description">Access your financial information anytime, anywhere with our responsive web app that works on all devices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How MoneyMat Works</h2>
+        <p class="section-subtitle">Getting started with MoneyMat is easy and takes just a few minutes.</p>
+        
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Create Account</h3>
+                <p class="step-description">Sign up and create your secure MoneyMat account in just a few clicks.</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Connect Finances</h3>
+                <p class="step-description">Securely connect your financial accounts or manually enter your data.</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Analyze & Plan</h3>
+                <p class="step-description">Get instant insights and create customized financial plans and budgets.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">What Our Users Say</h2>
+        <p class="section-subtitle">Join thousands of satisfied users who have transformed their financial lives with MoneyMat.</p>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"MoneyMat has completely changed how I manage my money. The insights helped me save an extra $450 per month that I didn't even realize I was wasting!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JS</div>
+                    <div class="author-info">
+                        <h4>Jane Smith</h4>
+                        <p>Marketing Professional</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As someone who always struggled with budgeting, MoneyMat made the process intuitive and even enjoyable. I've finally paid off all my credit card debt!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MD</div>
+                    <div class="author-info">
+                        <h4>Michael Davis</h4>
+                        <p>Software Engineer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The visualization tools in MoneyMat helped me understand my spending patterns and make better decisions. I'm now on track to buy my first home!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AR</div>
+                    <div class="author-info">
+                        <h4>Amanda Rodriguez</h4>
+                        <p>Small Business Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="get-started">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Financial Life?</h2>
+            <p>Join thousands of users who are taking control of their finances with MoneyMat. Start your journey toward financial freedom today.</p>
+            <a href="register.html" class="cta-button">Get Started for Free</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>MoneyMat</h3>
+                <p>Your personal finance manager for a secure financial future.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#guides">Financial Guides</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="mailto:info@moneymat.com">info@moneymat.com</a></li>
+                    <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    <li><a href="#support">Support Center</a></li>
+                    <li><a href="#social">Social Media</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 MoneyMat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

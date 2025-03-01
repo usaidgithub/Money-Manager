@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/income.css">
+</head>
+
+<body>
+    <div class="container">
+        <button class="btn">
+            <div class="category" data-name="Salary">
+                <i class="fas fa-credit-card"></i>
+                <span>Salary</span>
+            </div>
+        </button>
+        <button class="btn">
+            <div class="category" data-name="Part-time">
+                <i class="fas fa-clock"></i>
+                <span>Part-time</span>
+            </div>
+        </button>
+        <button class="btn">
+            <div class="category" data-name="Awards">
+                <i class="fas fa-gift"></i>
+                <span>Awards</span>
+            </div>
+        </button>
+        <button class="btn">
+            <div class="category" data-name="Rewards">
+                <i class="fas fa-th-large"></i>
+                <span>Rewards</span>
+            </div>
+        </button>
+        <button class="btn">
+            <div class="category" data-name="Others">
+                <i class="fas fa-cog"></i>
+                <span>Others</span>
+            </div>
+        </button>
+    </div>
+    <div class="form">
+        <span class="close-icon">&times;</span>
+        <h3>Enter the details here</h3>
+        <form action="http://localhost:3000/add_income" method="POST">
+            <label for="expenses_category">
+                Category:
+            </label>
+            <input type="text" id="expenses_category" name="expenses_category" readonly>
+
+            <label for="amount">
+                Amount:
+            </label>
+            <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
+
+            <label for="note">
+                Note:
+            </label>
+            <input type="text" id="note" name="note" placeholder="Enter a note..." required>
+            <input type="hidden" id="month" name="month" required readonly>
+            <input type="hidden" id="year" name="year" required readonly>
+
+            <div class="wrap">
+                <button type="submit" id="click">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="js/page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const month = sessionStorage.getItem('month');
+            const year = sessionStorage.getItem('year');
+
+            if (month && year) {
+                console.log('The month and year of the income is',month,year)
+                document.getElementById('month').value = month;
+                document.getElementById('year').value = year;
+            }
+        });
+    </script>
+</body>
+
+</html>

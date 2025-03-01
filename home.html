@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">MoneyMat</label>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="charts.html">Charts</a></li>
+      <li><a href="reports.html">Reports</a></li>
+      <li><a href="feedback.html">Yearly Analysis</a></li>
+      <li><a href="http://localhost:3000/logout">Log out</a></li>
+    </ul>
+  </nav>
+  <div class="calendar">
+    <div class="month">
+      <select id="monthselect">
+        <option value="1">Jan</option>
+        <option value="2">Feb</option>
+        <option value="3">Mar</option>
+        <option value="4">Apr</option>
+        <option value="5">May</option>
+        <option value="6">Jun</option>
+        <option value="7">Jul</option>
+        <option value="8">Aug</option>
+        <option value="9">Sep</option>
+        <option value="10">Oct</option>
+        <option value="11">Nov</option>
+        <option value="12">Dec</option>
+      </select>
+      <select id="yearselect">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+      </select>
+    </div>
+    <div class="income">
+      <h2>Income</h2>
+      <h2 id="income_amount">00</h2>
+    </div>
+    <div class="expenses">
+      <h2>Expenses</h2>
+      <h2 id="expenses_amount">00</h2>
+    </div>
+    <div class="balance">
+      <h2>Balance</h2>
+      <h2 id="balance_amount">00</h2>
+    </div>
+  </div>
+  <div class="records">
+    <div class="income-records"></div>
+    <div class="expenses-records"></div>
+    <div class="budget-records"></div>
+    <p class="no_records">No records found</p>
+  </div>
+  <div class="plus">
+    <div class="add">
+      <p>ADD DATA</p>
+    </div>
+    <div class="inc">
+      <a href="income.html"><button id="add_income">Income</button></a>
+    </div>
+    <div class="inc">
+      <a href="expenses.html"><button id="add_expenses">Expenses</button></a>
+    </div>
+    <div class="inc">
+      <a href="budget.html"><button id="add_budget">Budget</button></a>
+    </div>
+  </div>
+  <footer>
+    <div class="inner-footer">
+      <div class="footer-items about">
+        <h3>About Us</h3>
+        <p>Your company description goes here. This app helps you to manage finances.</p>
+      </div>
+      <div class="footer-items quick-links">
+        <h3>Quick Links</h3>
+        <p><a href="home.html">Home</a></p>
+        <p><a href="charts.html">Charts</a></p>
+        <p><a href="reports.html">Reports</a></p>
+        <p><a href="feedback.html">Feedback</a></p>
+      </div>
+      <div class="footer-items contact">
+        <h3>Contact Us</h3>
+        <p>Address: 123 Street, City, Country</p>
+        <p>Email: info@example.com</p>
+        <p>Phone: +123456789</p>
+      </div>
+    </div>
+  </footer>
+  
+  
+
+
+  <div class="form">
+    <span class="close-icon">&times;</span>
+    <h3>Enter the details here</h3>
+    <form action="http://localhost:3000/update_income" method="POST">
+      <input type="hidden" name="id" id="id">
+      <label for="attribute">
+        Select value you want to update:
+      </label>
+      <select id="attribute" name="attribute" onchange="toggleSuggestions(this)">
+        <option value="amount">Amount</option>
+        <option value="source">Source</option>
+        <option value="note">Note</option>
+      </select>
+      <br>
+      <label for="update_value">
+        Updated Value:
+      </label>
+      <input type="text" id="update_value" name="update_value" placeholder="Enter the updated value" required onkeyup="filterCategories(this)">
+        <!-- Suggestions Dropdown -->
+      <div id="suggestions" class="suggestions-box"></div>
+      <div class="wrap">
+        <button type="submit" id="click">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="form1">
+    <span class="close-icon1">&times;</span>
+    <h3>Enter the details here</h3>
+    <form action="http://localhost:3000/update_expenses" method="POST">
+      <input type="hidden" name="id1" id="id1">
+      <label for="attribute">
+        Select value you want to update:
+      </label>
+      <select id="attribute" name="attribute" onchange="toggleSuggestions(this)">
+        <option value="amount">Amount</option>
+        <option value="source">Source</option>
+        <option value="note">Note</option>
+      </select>
+      <br>
+      <label for="update_value">
+        Enter the value:
+      </label>
+      <input type="text" id="update_value" name="update_value" placeholder="Enter the updated value" required onkeyup="filterCategories(this)">
+      <div id="suggestions" class="suggestions-box"></div>
+      <div class="wrap">
+        <button type="submit" id="click">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="form2">
+    <span class="close-icon2">&times;</span>
+    <h3>Enter the details here</h3>
+    <form action="http://localhost:3000/update_budget" method="POST">
+      <input type="hidden" name="id2" id="id2">
+      <label for="attribute">
+        Select value you want to update:
+      </label>
+      <select id="attribute" name="attribute" onchange="toggleSuggestions(this)">
+        <option value="amount">Amount</option>
+        <option value="source">Source</option>
+      </select>
+      <br>
+      <label for="update_value">
+        Enter the value:
+      </label>
+      <input type="text" id="update_value" name="update_value" placeholder="Enter the updated value" required onkeyup="filterCategories(this)">
+      <div id="suggestions" class="suggestions-box"></div>
+      <div class="wrap">
+        <button type="submit" id="click">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <script src="js/fetch.js"></script>
+  <script src="js/page.js"></script>
+</body>
+
+</html>

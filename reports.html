@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+</head>
+<link rel="stylesheet" href="css/reports.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">MoneyMat</label>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="charts.html">Charts</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="feedback.html">Yearly Analysis</a></li>
+          <li><a href="http://localhost:3000/logout">Log out</a></li>
+        </ul>
+      </nav>
+    <div class="calendar">
+    <div class="income">
+        <h2>Income</h2>
+        <h2 id="income_amount">00</h2>
+      </div>
+      <div class="expenses">
+        <h2>Expenses</h2>
+        <h2 id="expenses_amount">00</h2>
+      </div>
+      <div class="balance">
+        <h2>Balance</h2>
+        <h2 id="balance_amount">00</h2>
+      </div>
+      </div>
+    <section class="section">
+    <div class="budget-container">
+        <div class="circle">
+          <h1 style="color: white;padding-left: 20px;">Monthly Budget</h1>
+          <svg width="200" height="200">
+            <circle cx="100" cy="100" r="90" stroke="grey" stroke-width="10" fill="none"></circle>
+            <circle cx="100" cy="100" r="90" stroke="yellow" stroke-width="10" fill="none" stroke-dasharray="565.48" stroke-dashoffset="0" id="progress-circle"></circle>
+          </svg>
+          <div class="remaining_percentage">Remaining:<span id="percentage">00</span></div>
+        </div>
+        <div class="details">
+          <div class="info">
+            <p id="remaining_amount"></p>
+            <p id="remaining_budget"></p>
+            <p id="remaining_expenses"></p>
+          </div>
+        </div>
+    </section>
+    <script src="js/report.js"></script>
+</body>
+</html>

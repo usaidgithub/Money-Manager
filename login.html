@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - Money Manager App</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    
+    <div class="container">
+        <form action="http://localhost:3000/login_user" method="POST" class="login-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div class="register-link">
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('http://localhost:3000/auth/check-session', {
+                method: 'GET',
+                credentials: 'include'  // Ensures cookies & session are sent
+            })
+            .then(response => response.json())
+            .then(data => {
+                const currentPage = window.location.pathname;
+                
+                if (data.authenticated && currentPage === "/login.html") {
+                    // User is already logged in but on login page → Redirect to home
+                    window.location.href = "/home.html";
+                } 
+                else if (!data.authenticated && currentPage !== "/login.html") {
+                    // User is NOT logged in and is NOT on login page → Redirect to login
+                    window.location.href = "/login.html";
+                }
+            })
+            .catch(error => console.error("Error checking session:", error));
+        });
+    </script>
+    
+        
+</body>
+</html>

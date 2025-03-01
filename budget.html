@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/expense.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="categories">
+            <button class="btn">
+                <div class="category" data-name="Monthly-Budget"><i class="fas fa-wallet"></i><span>
+                        Monthly Budget</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Phone"><i class="fas fa-phone"></i><span>Telephone</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Food"><i class="fas fa-utensils"></i><span>Food</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Entertainment"><i class="fas fa-film"></i><span>Entertainment</span>
+                </div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Education"><i class="fas fa-graduation-cap"></i><span>Education</span>
+                </div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Beauty"><i class="fas fa-cut"></i><span>Beauty</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Sport"><i class="fas fa-dumbbell"></i><span>Sport</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Social"><i class="fas fa-users"></i><span>Social</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Transportation"><i class="fas fa-bus"></i><span>Transportation</span>
+                </div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Clothing"><i class="fas fa-tshirt"></i><span>Clothing</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Car"><i class="fas fa-car"></i><span>Car</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Drinks"><i class="fas fa-wine-bottle"></i><span>Drinks</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Shopping"><i class="fas fa-shopping-cart"></i><span>Shopping</span>
+                </div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Electronics"><i class="fas fa-laptop"></i><span>Electronics</span>
+                </div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Travel"><i class="fas fa-plane"></i><span>Travel</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Health"><i class="fas fa-heart"></i><span>Health</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Pet"><i class="fas fa-paw"></i><span>Pet</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Repair"><i class="fas fa-tools"></i><span>Repair</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Housing"><i class="fas fa-home"></i><span>Housing</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Home"><i class="fas fa-couch"></i><span>Home</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Gift"><i class="fas fa-gift"></i><span>Gift</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Donation"><i class="fas fa-hand-holding-heart"></i><span>Donate</span>
+                </div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Lottery"><i class="fas fa-ticket-alt"></i><span>Lottery</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Snacks"><i class="fas fa-cookie"></i><span>Snacks</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Child"><i class="fas fa-child"></i><span>Child</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Vegetable"><i class="fas fa-carrot"></i><span>Vegetable</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Fruit"><i class="fas fa-apple-alt"></i><span>Fruit</span></div>
+            </button>
+            <button class="btn">
+                <div class="category" data-name="Others"><i class="fas fa-cogs"></i><span>Payments</span></div>
+            </button>
+        </div>
+    </div>
+    <div class="form">
+        <span class="close-icon">&times;</span>
+        <h3>Enter the details here</h3>
+        <form action="http://localhost:3000/add_budget" method="POST">
+            <label for="expenses_category">
+                Category:
+            </label>
+            <input type="text" id="expenses_category" name="expenses_category" readonly>
+
+            <label for="amount">
+                Budget Amount:
+            </label>
+            <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
+            <input type="hidden" id="month" name="month" required readonly>
+            <input type="hidden" id="year" name="year" required readonly>
+            <div class="wrap">
+                <button type="submit" id="click">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/page.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const month = sessionStorage.getItem('month');
+            const year = sessionStorage.getItem('year');
+
+            if (month && year) {
+                document.getElementById('month').value = month;
+                document.getElementById('year').value = year;
+            }
+        });
+    </script>
+</body>
+
+</html>
