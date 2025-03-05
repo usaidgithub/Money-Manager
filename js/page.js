@@ -20,7 +20,7 @@ const categoryList = [
     "Sport", "Social", "Transportation", "Clothing", "Car", "Drinks", 
     "Cigarette", "Electronics", "Travel", "Health", "Pet", "Repair", 
     "Housing", "Home", "Gift", "Donation", "Lottery", "Snacks", "Child", 
-    "Vegetable", "Fruit", "Others"
+    "Vegetable", "Fruit", "Others","Salary", "Part-time", "Awards", "Rewards"
 ];
 
 function toggleSuggestions(selectElement) {
